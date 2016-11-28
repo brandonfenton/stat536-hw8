@@ -67,7 +67,7 @@ clust <- makeCluster(detectCores())
 
 2) How do they determine the order of the trend model from none to quadratic? Are there any potential criticisms of the way they do this? Do not discuss the potential issue with doing these tests without accounting for potential autocorrelation – we know that the SEs would change if these tests were conducted using models that account for autocorrelation.
 
-    
+    The order of the trend model was determined using "standard statistical procedures(e.g., _t_-test."  The first problem with this approach is that
 
 3) Figure 3 contains two ACF plots. Discuss the patterns in the two SACFs (left two panels of Figure 3). 
 
