@@ -63,13 +63,21 @@ clust <- makeCluster(detectCores())
 
 1) What do they provide for a reason for removing the quadratic trend? Why do they want to use a trend model with limited flexibility?
 
+    The authors justify removing the quadratic trend on the basis that ARMA models rely on the assumption of stationarity.  Since the goal was to remove only the trend and not the variation around the trend, "simple, parsimonious methods" were given preference.
+
 2) How do they determine the order of the trend model from none to quadratic? Are there any potential criticisms of the way they do this? Do not discuss the potential issue with doing these tests without accounting for potential autocorrelation – we know that the SEs would change if these tests were conducted using models that account for autocorrelation.
+
+    
 
 3) Figure 3 contains two ACF plots. Discuss the patterns in the two SACFs (left two panels of Figure 3). 
 
 4) Note that their bounds for testing in Figure 3 are different from the formula provided in the book – we will discuss the modification I think they used later. What is the sample size (length of time series!) for the mean douglas-fir and mean western white pine time series. Based on these sample sizes, what cut-offs would you plot on Figure 3 based on the approximate result we discussed in class? How do theirs differ?
 
+They use +/- 2 SE for the bound
+
 5) We discussed four different reasons for doing time series modeling at the beginning of the semester (pages 1 and 2 of lecture notes). Of those four reasons, which one does their use of ARMA models fall into and why? There may be multiple choices that are reasonable here, so the argument you make is important. I am not talking about what you could do with their models, just what they did do with them and their reason for employing them.
+
+I'd say some combination of description and accommodation
 
 6) Use arima.sim to simulate from Delta response AR(2) models for either the mean D or mean W discussed in Table 4 generating the same number of observations as in their time series (see Table 2). You can use a standard deviation for the white noise process of 0.4. This simulation is just concerned with the residual process after removing the trend. Plot a simulated fake time series, the SACF from the fake time series, and compare the results to those that you can find in the paper in Figure 3. How are your results similar or different from their results? Simulate a second series and discuss the differences in your two simulations.
 
