@@ -72,6 +72,8 @@ clust <- makeCluster(detectCores())
 
 3) _Figure 3 contains two ACF plots. Discuss the patterns in the two SACFs (left two panels of Figure 3)._ 
 
+Both SACF plots exhibit similar patterns.  Over the first few lags there is positive autocorrelation.  For mean Douglas-fir the ACF exceeds the 2SE band for the 2nd lag, while the mean western white pine exceeds the band at both the 1st and 2nd lag indicating that strong autocorrelation is present.  Each trend flips to a negative autocorrelation at lag four and five respectively.  Then, both switch back to positive at lags of 11 and 12 respectively.  The pattern of both trends are that of a sine wave and are visibility damping as the number of lags increases.
+
 4) _Note that their bounds for testing in Figure 3 are different from the formula provided in the book – we will discuss the modification I think they used later. What is the sample size (length of time series!) for the mean douglas-fir and mean western white pine time series. Based on these sample sizes, what cut-offs would you plot on Figure 3 based on the approximate result we discussed in class? How do theirs differ?_
 
 They use +/- 2 SE for the bound
