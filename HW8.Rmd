@@ -72,24 +72,32 @@ clust <- makeCluster(detectCores())
 
 3) _Figure 3 contains two ACF plots. Discuss the patterns in the two SACFs (left two panels of Figure 3)._ 
 
-    Both SACF plots exhibit similar patterns.  Over the first few lags there is positive autocorrelation.  For mean Douglas-fir the ACF exceeds the 2SE band for the 2nd lag, while the mean western white pine exceeds the band at both the 1st and 2nd lag indicating that strong autocorrelation is present.  Each trend flips to a negative autocorrelation at lag four and five respectively.  Then, both switch back to positive at lags of 11 and 12 respectively.  The pattern of both trends are that of a sine wave and are visibly damping as the number of lags increases.
+    Both SACF plots exhibit similar patterns.  Over the first few lags there is positive autocorrelation.  For mean Douglas-fir the ACF exceeds the 2SE band for the 2nd lag, while the mean western white pine exceeds the band at both the 1st and 2nd lag indicating that there is strong evidencde that the autocorrelation is not equal to zero.  Each trend flips to a negative autocorrelation at lag four and five respectively.  Then, both switch back to positive at lags of 11 and 12 respectively.  The pattern of both trends are that of a sine wave and are visibility damping as the number of lags increases.
 
 4) _Note that their bounds for testing in Figure 3 are different from the formula provided in the book – we will discuss the modification I think they used later. What is the sample size (length of time series!) for the mean douglas-fir and mean western white pine time series. Based on these sample sizes, what cut-offs would you plot on Figure 3 based on the approximate result we discussed in class? How do theirs differ?_
 
-They use +/- 2 SE for the bound
+    The sample size for Douglas fir is 85.  For the white the pine the sample size is 77.  Therefore the cut-offs based on the approximation we discussed are $\pm \frac{2}{\sqrt{8}} = \pm 0.7071$ for the douglas fir and $\pm \frac{2}{\sqrt{10}} = \pm 0.6325$ for the white pine.  Our approximation differs from the 2SE method used by the author, in that our approximation is constant across different lags.  The approximation used by the authors increases slightly as the size of the lags increases
 
 5) _We discussed four different reasons for doing time series modeling at the beginning of the semester (pages 1 and 2 of lecture notes). Of those four reasons, which one does their use of ARMA models fall into and why? There may be multiple choices that are reasonable here, so the argument you make is important. I am not talking about what you could do with their models, just what they did do with them and their reason for employing them._
 
-    Of the four reasons for doing time-series modeling -- description/understanding, accommodation, monitoring/control, and forecasting -- the primary purpose of this paper is description/understanding ("we looked for he presence and structure of autocorrelation"), albeit with the aim of facilitating accommodation in future studies.  
+    Of the four reasons for doing time-series modeling -- description/understanding, accommodation, monitoring/control, and forecasting -- the primary purpose of this paper is description/understanding ("we looked for he presence and structure of autocorrelation"), albeit with the aim of facilitating accommodation in future studies.  Although the models were used to examine scientific questions of interest such as what the relationship between discrimination ($\Delta$) and height for each species might be, this was not the primary purpose of the paper.
 
 6) _Use arima.sim to simulate from Delta response AR(2) models for either the mean D or mean W discussed in Table 4 generating the same number of observations as in their time series (see Table 2). You can use a standard deviation for the white noise process of 0.4. This simulation is just concerned with the residual process after removing the trend. Plot a simulated fake time series, the SACF from the fake time series, and compare the results to those that you can find in the paper in Figure 3. How are your results similar or different from their results? Simulate a second series and discuss the differences in your two simulations._
 
 ```{r p6}
-
+set.seed(153)
+y1 <- arima.sim(model=list(ar=c(0.37,0.15)), n=77, sd=0.4)
+y2 <- arima.sim(model=list(ar=c(0.37,0.15)), n=77, sd=0.4)
 ```
 
 7) _Use R to find the roots of your selected AR(2) model based on their published coefficients and note what that tells you about the properties of the AR(2) process under consideration._
 
 ```{r p7}
-
+zvals <- seq(-4.2,1.7, by=0.01)
+fz <- function(x) 1 - 0.37*(x) - 0.15*(x^2)
+plot(x=zvals, y=fz(zvals), type="l", ylab = expression(paste("1-0.37z-0.15",z^2)),
+     xlab="z")
+abline(h=0, lty=2)
 ```
+
+Using `polyroot(c(1,-0.37,-0.15))`, the resultant roots are `r polyroot(c(1,-0.37,-0.15))[1]` and `r polyroot(c(1,-0.37,-0.15))[2]`.  Both of these numbers have absolute values greater than one, 
