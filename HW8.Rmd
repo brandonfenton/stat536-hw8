@@ -100,4 +100,4 @@ plot(x=zvals, y=fz(zvals), type="l", ylab = expression(paste("1-0.37z-0.15",z^2)
 abline(h=0, lty=2)
 ```
 
-Using `polyroot(c(1,-0.37,-0.15))`, the resultant roots are `r polyroot(c(1,-0.37,-0.15))[1]` and `r polyroot(c(1,-0.37,-0.15))[2]`.  Both of these numbers have absolute values greater than one, 
+Using `polyroot(c(1,-0.37,-0.15))`, the resultant roots are `r polyroot(c(1,-0.37,-0.15))[1]` and `r polyroot(c(1,-0.37,-0.15))[2]`.  Both of these numbers have absolute values greater than one, which indicates that the AR(2) process is stationary.
