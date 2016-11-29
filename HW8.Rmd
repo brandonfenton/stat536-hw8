@@ -85,10 +85,22 @@ clust <- makeCluster(detectCores())
 6) _Use arima.sim to simulate from Delta response AR(2) models for either the mean D or mean W discussed in Table 4 generating the same number of observations as in their time series (see Table 2). You can use a standard deviation for the white noise process of 0.4. This simulation is just concerned with the residual process after removing the trend. Plot a simulated fake time series, the SACF from the fake time series, and compare the results to those that you can find in the paper in Figure 3. How are your results similar or different from their results? Simulate a second series and discuss the differences in your two simulations._
 
 ```{r p6}
+require(TSA)
 set.seed(153)
 y1 <- arima.sim(model=list(ar=c(0.37,0.15)), n=77, sd=0.4)
 y2 <- arima.sim(model=list(ar=c(0.37,0.15)), n=77, sd=0.4)
+
+plot(1:77, y1, type="l", ylab=expression(delta[p]* ' Simulation 1'), main='White Pine')
+plot(1:77, y2, type="l", ylab=expression(delta[p]* ' Simulation 2'), main='White Pine')
+
+par(mfrow=c(1,2))
+acf(y1, main='Series Simulation 1')
+acf(y2, main='Series Simulation 2')
 ```
+
+The first simulation has a large but not "significant" spike at the first lag and a single significant spike at lag 14.  This likely indicates that there is not autocorrelation present in the first simulated sample based on the random generation process. This constrasts the authors' results which had two significant spikes at the first two lags.  Furthermore, the damping sinusoidal pattern is not present in the simulated sample.  
+
+However, the second simulation has autocorrelation present in the first two lags as expected based on how the data was generated.  Again the data does not exhibit a strong damping sinusoidal pattern, however one could make the case that sine pattern is present albeit a different one than in the paper.
 
 7) _Use R to find the roots of your selected AR(2) model based on their published coefficients and note what that tells you about the properties of the AR(2) process under consideration._
 
